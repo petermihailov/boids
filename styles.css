@@ -1,9 +1,15 @@
+:root {
+    --bg-color: #0f1117;
+    --bg-color-transparent: rgba(15, 17, 23, .65);
+    --text-color: #fff;
+    --text-accent-color: #e91e63;
+    --link-color: #03a9f4;
+}
+
 body {
     user-select: none;
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    color: #fff;
-    background: #0f1117;
+    color: var(--text-color);
+    background: var(--bg-color);
 }
 
 input {
@@ -15,41 +21,61 @@ input {
 }
 
 canvas {
-    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
+/* controls */
 #controls {
     position: fixed;
     top: 0;
     left: 0;
     display: inline-block;
     padding: .5em;
-    transition: opacity .1s ease-out;
+    transition: transform .2s ease-out;
+    background-color: var(--bg-color-transparent);
 }
 
-#controls label {
-    display: flex;
+#controls > * {
+    transition: opacity .2s ease-out;
 }
 
 #controls > * + * {
     margin-top: .5em;
 }
 
+#controls label {
+    display: flex;
+}
+
 #controls label:focus-within {
     text-decoration: underline;
 }
 
+#controls.disabled {
+    transform: translateX(1rem);
+}
+
+#controls.disabled > * {
+    opacity: .6;
+}
+
 #controls.disabled::after {
-    content: 'controls disabled';
+    content: 'playing demo';
     position: absolute;
     display: flex;
     align-items: flex-end;
-    top: 0;
-    left: .5em;
-    bottom: -1em;
+    top: 0.5rem;
+    bottom: 0;
+    left: -0.7rem;
     right: 0;
-    font-size: 0.8em;
-    background-color: hsla(225, 21%, 7%, 0.6);
+    color: var(--text-accent-color);
+    font-size: 0.8rem;
+    writing-mode: tb-rl;
+    white-space: nowrap;
 }
 
 .checkbox {
@@ -69,6 +95,26 @@ input[type=checkbox]:checked + .checkbox {
     transition: background-position .15s ease-out;
 }
 
+/* links */
+#links {
+    position: fixed;
+    font-size: .8rem;
+    bottom: .5em;
+    left: .5em;
+}
+
+#links a {
+    color: var(--link-color);
+    text-decoration: none;
+    background-color: var(--bg-color-transparent);
+    transition: opacity .1s ease-out;
+}
+
+#links a:hover {
+    opacity: .8;
+}
+
+/* helpers */
 [hidden] {
     display: none !important;
 }

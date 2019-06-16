@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Boids simulator</title>
+    <link rel="stylesheet" href="modern-normalize.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +16,21 @@
     <label><input id="cohesion" type="checkbox" checked><span class="checkbox"></span>cohesion</label>
     <label><input id="alignment" type="checkbox" checked><span class="checkbox"></span>alignment</label>
     <label><input id="separation" type="checkbox" checked><span class="checkbox"></span>separation</label>
-    <label hidden><input id="track" type="checkbox"><span class="checkbox"></span>track</label>
+    <hr/>
+    <label><input id="track" type="checkbox"><span class="checkbox"></span>track</label>
+</div>
+
+<div id="links">
+    <a href="https://en.wikipedia.org/wiki/Boids"
+       title="Boids is an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds. His paper on this topic was published in …"
+       target="_blank"
+       rel="noopener"
+       class="link-wiki">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="5 0 20 25">
+            <path fill="#fff" d="M29 6.4v.3l-.3.1c-.6 0-1.1.3-1.5.6-.4.4-.8 1-1.2 2l-6.4 14.3c0 .1-.1.2-.3.2a.4.4 0 0 1-.4-.2l-3.5-7.5-4.1 7.5a.4.4 0 0 1-.4.2c-.2 0-.3-.1-.3-.2L4.3 9.4a5 5 0 0 0-1.2-2c-.4-.3-1-.5-1.8-.6H1a.4.4 0 0 1-.1-.3c0-.3 0-.4.2-.4l1.7.1a18.1 18.1 0 0 0 3.4 0 28.2 28.2 0 0 1 2 0s.2 0 .2.3c0 .2 0 .3-.2.3-.5 0-1 .2-1.3.4-.3.3-.5.6-.5 1l.2.7 5.1 11.7 3-5.5-2.7-5.8-1.2-2c-.3-.2-.8-.4-1.5-.5h-.1a.4.4 0 0 1-.1-.3c0-.3 0-.4.2-.4l1.5.1a13 13 0 0 0 3 0 19.6 19.6 0 0 1 1.7 0c.1 0 .2 0 .2.3l-.1.3c-1.1 0-1.7.4-1.7 1 0 .2.1.6.4 1.1l1.8 3.7L18 9.2c.3-.4.4-.8.4-1.2 0-.7-.6-1.1-1.7-1.2l-.1-.3v-.3h1.7a16 16 0 0 0 4 0c.1 0 .2 0 .2.2 0 .3-.1.4-.3.4a3 3 0 0 0-1.5.6c-.4.2-1 1-1.5 2l-2.4 4.4 3.2 6.6 4.8-11.2.3-1c0-.9-.6-1.3-1.7-1.4-.1 0-.2-.1-.2-.3 0-.3.1-.4.3-.4l1.4.1a14.4 14.4 0 0 0 4 0l.1.2z"></path>
+        </svg>
+        Boids algorithm
+    </a>
 </div>
 
 <script title="page init">
@@ -32,10 +47,8 @@
     canvas.getContext('2d').scale(devicePixelRatio, devicePixelRatio);
   }
 </script>
-
 <script src="vector2d.js"></script>
 <script src="boids.js"></script>
-
 <script title="boids init">
   "use strict";
   const controlsEl = document.querySelector('#controls');
@@ -67,7 +80,7 @@
     separationEl.onchange = ({target: {checked}}) => separation = checked;
   }
   </script>
-  <script title="animation rules">
+<script title="playing demo">
   "use strict";
   {
     const delay = (t, v) => new Promise((res) => setTimeout(res.bind(null, v), t));
