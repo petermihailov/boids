@@ -1,7 +1,7 @@
 body {
     user-select: none;
     margin: 0;
-    font-family: system-ui;
+    font-family: system-ui, sans-serif;
     color: #fff;
     background: #0f1117;
 }
