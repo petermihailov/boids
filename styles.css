@@ -1,0 +1,60 @@
+body {
+    user-select: none;
+    margin: 0;
+    font-family: system-ui;
+    color: #fff;
+    background: #0f1117;
+}
+
+input {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+canvas {
+    display: block;
+}
+
+#controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding: .5em;
+}
+
+#controls label {
+    display: flex;
+}
+
+#controls > * + * {
+    margin-top: .5em;
+}
+
+#controls label:focus-within {
+    text-decoration: underline;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: .5em;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' viewBox='0 0 5 4'%3E%3Cpath d='M0,0 L5,2 0,4 1,2 0,0' fill='%23333'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position-x: -20px;
+}
+
+input[type=checkbox]:checked + .checkbox {
+    background-position: center;
+    background-color: currentColor;
+    transition: background-position .15s ease-out;
+}
+
+[hidden] {
+    display: none !important;
+}

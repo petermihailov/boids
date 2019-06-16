@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Boids simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas></canvas>
+
+<div id="controls">
+    <label><input id="cohesion" type="checkbox" checked><span class="checkbox"></span>cohesion</label>
+    <label><input id="alignment" type="checkbox" checked><span class="checkbox"></span>alignment</label>
+    <label><input id="separation" type="checkbox" checked><span class="checkbox"></span>separation</label>
+    <label hidden><input id="track" type="checkbox"><span class="checkbox"></span>track</label>
+</div>
+
+<script title="page init">
+  "use strict";
+  {
+    const {devicePixelRatio, innerWidth, innerHeight} = window;
+    const canvas = document.querySelector('canvas');
+
+    canvas.width = innerWidth * devicePixelRatio;
+    canvas.height = innerHeight * devicePixelRatio;
+    canvas.style.width = innerWidth + 'px';
+    canvas.style.height = innerHeight + 'px';
+
+    canvas.getContext('2d').scale(devicePixelRatio, devicePixelRatio);
+  }
+</script>
+
+<script src="vector2d.js"></script>
+<script src="boids.js"></script>
+
+<script title="boids init">
+  "use strict";
+  const trackEl = document.querySelector('#track');
+  const cohesionEl = document.querySelector('#cohesion');
+  const alignmentEl = document.querySelector('#alignment');
+  const separationEl = document.querySelector('#separation');
+
+  let track = false;
+  let cohesion = true;
+  let alignment = true;
+  let separation = true;
+
+  {
+    setup();
+    const {requestAnimationFrame} = window;
+    const loop = () => {
+      draw(track, {cohesion, alignment, separation});
+      requestAnimationFrame(loop);
+    };
+    loop();
+
+    // track
+    trackEl.onchange = ({target: {checked}}) => track = checked;
+
+    // rules
+    cohesionEl.onchange = ({target: {checked}}) => cohesion = checked;
+    alignmentEl.onchange = ({target: {checked}}) => alignment = checked;
+    separationEl.onchange = ({target: {checked}}) => separation = checked;
+  }
+  </script>
+  <script title="animation rules">
+  "use strict";
+  {
+    const delay = (t, v) => new Promise((res) => setTimeout(res.bind(null, v), t));
+    const setCohesion = (isActive) => {cohesionEl.checked = isActive; cohesion = isActive};
+    const setAlignment = (isActive) => {alignmentEl.checked = isActive; alignment = isActive};
+    const setSeparation = (isActive) => {separationEl.checked = isActive; separation = isActive};
+
+    setCohesion(false);
+    setAlignment(true);
+    setSeparation(true);
+
+    Promise.resolve()
+      .then(() => delay(5000))
+      .then(() => setCohesion(true))
+      .then(() => setSeparation(false))
+      .then(() => delay(12000))
+      .then(() => setAlignment(false))
+      .then(() => setCohesion(false))
+      .then(() => setSeparation(true))
+      .then(() => delay(1000))
+      .then(() => setSeparation(false))
+      .then(() => delay(4000))
+      .then(() => setAlignment(true))
+      .then(() => delay(10000))
+      .then(() => setCohesion(true))
+      .then(() => delay(5000))
+      .then(() => setCohesion(false))
+      .then(() => setAlignment(true))
+      .then(() => setSeparation(true))
+      .then(() => delay(800))
+      .then(() => setCohesion(true))
+  }
+</script>
+</body>
+</html>
