@@ -38,6 +38,7 @@
 
 <script title="boids init">
   "use strict";
+  const controlsEl = document.querySelector('#controls');
   const trackEl = document.querySelector('#track');
   const cohesionEl = document.querySelector('#cohesion');
   const alignmentEl = document.querySelector('#alignment');
@@ -73,7 +74,15 @@
     const setCohesion = (isActive) => {cohesionEl.checked = isActive; cohesion = isActive};
     const setAlignment = (isActive) => {alignmentEl.checked = isActive; alignment = isActive};
     const setSeparation = (isActive) => {separationEl.checked = isActive; separation = isActive};
+    const setControlsAvailability = (isActive) => {
+      if (isActive) {
+        controlsEl.classList.remove('disabled');
+      } else {
+        controlsEl.classList.add('disabled');
+      }
+    };
 
+    setControlsAvailability(false);
     setCohesion(false);
     setAlignment(true);
     setSeparation(true);
@@ -98,6 +107,8 @@
       .then(() => setSeparation(true))
       .then(() => delay(800))
       .then(() => setCohesion(true))
+      .then(() => delay(3000))
+      .then(() => setControlsAvailability(true))
   }
 </script>
 </body>
