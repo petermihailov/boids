@@ -19,6 +19,11 @@
     <hr/>
     <label><input id="track" type="checkbox"><span class="checkbox"></span>track</label>
     <label><input id="play-demo" type="button" value="play demo"></label>
+    <button id="toggle-controls">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 0 11.9 6.5" fill="none" stroke="#fff">
+            <polyline points="0.7,0.7 5.9,5.7 11.1,0.7"></polyline>
+        </svg>
+    </button>
 </div>
 
 <div id="links">
@@ -54,6 +59,7 @@
 <script title="boids init">
   "use strict";
   const controlsEl = document.querySelector('#controls');
+  const toggleControlsEl = document.querySelector('#toggle-controls');
   const trackEl = document.querySelector('#track');
   const playDemoEl = document.querySelector('#play-demo');
   const cohesionEl = document.querySelector('#cohesion');
@@ -81,6 +87,8 @@
     cohesionEl.onchange = ({target: {checked}}) => cohesion = checked;
     alignmentEl.onchange = ({target: {checked}}) => alignment = checked;
     separationEl.onchange = ({target: {checked}}) => separation = checked;
+
+    toggleControlsEl.addEventListener('click', () => controlsEl.classList.toggle('hidden'))
   }
   </script>
 <script title="playing demo">
@@ -119,13 +127,12 @@
         .then(() => delay(10000))
         .then(() => setCohesion(true))
         .then(() => delay(5000))
+        .then(() => setControlsAvailability(true))
         .then(() => setCohesion(false))
         .then(() => setAlignment(true))
         .then(() => setSeparation(true))
         .then(() => delay(800))
         .then(() => setCohesion(true))
-        .then(() => delay(3000))
-        .then(() => setControlsAvailability(true))
     };
 
     playDemoEl.addEventListener('click', playDemo);

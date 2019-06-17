@@ -107,6 +107,25 @@ input[type=button] {
     background: transparent;
 }
 
+#toggle-controls {
+    display: block;
+    position: absolute;
+    padding: 0;
+}
+
+#toggle-controls svg {
+    transform: rotate(180deg);
+    transition: transform .2s ease-out;
+}
+
+#controls.hidden {
+    transform: translateY(calc(-100% + .5em));
+}
+
+#controls.hidden #toggle-controls svg {
+    transform: rotate(0);
+}
+
 /* links */
 #links {
     position: fixed;
