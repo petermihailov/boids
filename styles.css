@@ -12,7 +12,7 @@ body {
     background: var(--bg-color);
 }
 
-input {
+input[type=checkbox] {
     position: absolute;
     clip: rect(0 0 0 0);
     width: 1px;
@@ -49,6 +49,7 @@ canvas {
 
 #controls label {
     display: flex;
+    cursor: pointer;
 }
 
 #controls label:focus-within {
@@ -64,7 +65,7 @@ canvas {
 }
 
 #controls.disabled::after {
-    content: 'playing demo';
+    content: '🔒  playing demo';
     position: absolute;
     display: flex;
     align-items: flex-end;
@@ -74,7 +75,7 @@ canvas {
     right: 0;
     color: var(--text-accent-color);
     font-size: 0.8rem;
-    writing-mode: tb-rl;
+    writing-mode: tb;
     white-space: nowrap;
 }
 
@@ -95,12 +96,25 @@ input[type=checkbox]:checked + .checkbox {
     transition: background-position .15s ease-out;
 }
 
+input[type=button] {
+    color: var(--text-color);
+    padding: 0;
+    width: 100%;
+    line-height: 28px;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 2px;
+    background: transparent;
+}
+
 /* links */
 #links {
     position: fixed;
     font-size: .8rem;
     bottom: .5em;
     left: .5em;
+    right: .5em;
+    text-align: right;
 }
 
 #links a {
@@ -112,6 +126,10 @@ input[type=checkbox]:checked + .checkbox {
 
 #links a:hover {
     opacity: .8;
+}
+
+#links a:not(:first-child) {
+    margin-left: .5em;
 }
 
 /* helpers */

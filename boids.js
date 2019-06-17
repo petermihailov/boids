@@ -13,7 +13,7 @@ const k = getScaleCoefficient(count);
 
 function setup() {
   while (boids.length < count) {
-    boids.push(new Boid(random(width), random(height)));
+    boids.push(new Boid(width / 2, height / 2));
   }
 }
 
